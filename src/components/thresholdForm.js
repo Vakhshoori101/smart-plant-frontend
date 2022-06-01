@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { SmartPlantBackend } from "./utils";
 
 const FormInput = ({val, thresholds, onChange}) => (
@@ -11,21 +11,13 @@ const FormInput = ({val, thresholds, onChange}) => (
   </label>
 )
 
-const ThresholdForm = () => {
-  const [thresholds, setThresholds] = useState({});
-
-  useEffect(() => {
-    const getThresholds = async () => {
-      const retrievedThresholds = await SmartPlantBackend.get('/thresholds');
-      setThresholds(retrievedThresholds.data);
-    }
-    getThresholds();
-  }, []);
+const ThresholdForm = ({thresholds, setThresholds}) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     await SmartPlantBackend.put('/thresholds', thresholds);
     alert('Thresholds Updated!');
+    window.location.reload();
   }
 
   if (Object.keys(thresholds).length === 0) {

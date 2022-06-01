@@ -4,17 +4,31 @@ import { Chart as ChartJS, registerables } from 'chart.js';
 
 ChartJS.register(...registerables);
 
-const Graph = ({title, labels, data}) => {
+const Graph = ({title, labels, data, minThreshold, maxThreshold}) => {
+
   const parsedData = {
     labels,
     datasets: [
       {
         label: title,
         data,
-        borderColor: 'rgb(255, 99, 132)',
-        backgroundColor: 'rgba(255, 99, 132, 0.5)',
+        borderColor: 'green',
+        backgroundColor: 'green',
+      },
+      {
+        label: 'Min Threshold',
+        data: Array(labels.length).fill(minThreshold),
+        borderColor: 'red',
+        backgroundColor: 'red',
+      },
+      {
+        label: 'Max Threshold',
+        data: Array(labels.length).fill(maxThreshold),
+        borderColor: 'red',
+        backgroundColor: 'red',
       }
-    ]
+    ],
+    
   }
 
   const options = {
@@ -36,7 +50,12 @@ const Graph = ({title, labels, data}) => {
           }
         }
       }
-    }
+    },
+    elements: {
+      point: {
+        radius: 0,
+      }
+    },
   };
 
   return <Line options={options} data={parsedData} />
