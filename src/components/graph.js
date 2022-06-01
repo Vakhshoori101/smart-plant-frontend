@@ -36,7 +36,7 @@ const Graph = ({title, labels, data, minThreshold, maxThreshold}) => {
     plugins: {
       title: {
         display: true,
-        text: 'Chart.js Line Chart',
+        text: title.charAt(0).toUpperCase() + title.slice(1),
       },
     },
     scales: {
