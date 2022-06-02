@@ -12,6 +12,10 @@ const Graphs = ({thresholds}) => {
       setData(retrievedData.data);
     }
     getData();
+    const interval = setInterval(() => getData(), 5000);
+    return () => {
+      clearInterval(interval);
+    }
   }, []);
 
   if (Object.keys(data).length === 0) {
