@@ -4,6 +4,13 @@ import { Chart as ChartJS, registerables } from 'chart.js';
 
 ChartJS.register(...registerables);
 
+const chartTitles = {
+  moisture: 'Moisture (%)',
+  light: 'Light (%)',
+  temperature: 'Temperature (C)',
+  humidity: 'Humidity (%)'
+}
+
 const Graph = ({title, labels, data, minThreshold, maxThreshold}) => {
 
   const parsedData = {
@@ -36,7 +43,7 @@ const Graph = ({title, labels, data, minThreshold, maxThreshold}) => {
     plugins: {
       title: {
         display: true,
-        text: title.charAt(0).toUpperCase() + title.slice(1),
+        text: chartTitles[title],
       },
     },
     scales: {
